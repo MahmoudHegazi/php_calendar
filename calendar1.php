@@ -16,15 +16,18 @@ $month_len = count($months);
 function get_month_days($month_index,$year) {
 $days_in_month =cal_days_in_month(CAL_GREGORIAN,$month_index,$year);
 $days_list = range(1,$days_in_month);
-$list_show = '[' . implode(",",$days_list);
-$list_show .= ']';
-return $list_show;
+$list_show_string = '[' . implode(",",$days_list);
+$list_show_string .= ']';
+$result['days']  =  $days_list;
+$result['days_list']  =  $days_list;
+$result['days_string']  =  $list_show_string;
+return $result;
 }
 
 $output = '<div class="container"><ul id="' . $year . '">';
 for ($i=0; $i < $month_len; $i++) {
    $output .= '<li class="month_in_' . $month_class . '" data-year="' . $month_class . '">';
-   $output .= $months[$i] . '<br /><br /><li><ul><li>' . get_month_days($i+1,$year) . '</li></ul></li></li>';
+   $output .= $months[$i] . '<br /><br /><li><ul><li>' . get_month_days($i+1,$year)['days_string'] . '</li></ul></li></li>';
 }
 $output .= '</ul></div>';
 echo $output;
